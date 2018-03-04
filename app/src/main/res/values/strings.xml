@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TrialRun3</string>
+    <string name="SinglePlayerMode">Single Player</string>
+    <string name="oneOpponent">1</string>
+    <string name="twoOpponents">2</string>
+    <string name="Choose_cards">Choose Deck</string>
+    <string name="Start_game">Start</string>
+</resources>
