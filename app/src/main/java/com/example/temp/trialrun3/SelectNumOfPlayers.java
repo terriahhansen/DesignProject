@@ -17,7 +17,7 @@ public class SelectNumOfPlayers extends AppCompatActivity {
         GameMode = getIntent().getStringExtra(ChooseMode.EXTRA_GAMEMODE);
     }
 
-    public void Select1Opponent(View view)
+    public void select1Opponent(View view)
     {
         Intent intent = new Intent(this, Lobby.class);
         intent.putExtra(EXTRA_NUMOPPONENTS, 1);
@@ -25,7 +25,7 @@ public class SelectNumOfPlayers extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Select2Opponents(View view)
+    public void select2Opponents(View view)
     {
         Intent intent = new Intent(this, Lobby.class);
         intent.putExtra(EXTRA_NUMOPPONENTS, 2);
@@ -33,19 +33,19 @@ public class SelectNumOfPlayers extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Select3Opponents(View view)
+    public void select3Opponents(View view)
     {
 //        Intent intent = new Intent(this, Lobby.class);
 //        startActivity(intent);
     }
 
-    public void Select4Opponents(View view)
+    public void select4Opponents(View view)
     {
 //        Intent intent = new Intent(this, Lobby.class);
 //        startActivity(intent);
     }
 
-    public void Select5Opponents(View view)
+    public void select5Opponents(View view)
     {
 //        Intent intent = new Intent(this, Lobby.class);
 //        startActivity(intent);

@@ -10,6 +10,11 @@ import android.os.Parcelable;
 public class AttackCard implements Card, Parcelable
 {
 
+    protected AttackCard()
+    {
+
+    }
+
     protected AttackCard(Parcel in) {
     }
 

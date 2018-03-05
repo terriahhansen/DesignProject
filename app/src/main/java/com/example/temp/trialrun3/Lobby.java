@@ -45,7 +45,7 @@ public class Lobby extends AppCompatActivity {
 //        else if ()
     }
 
-    public void ChooseCards(View view)
+    public void chooseCards(View view)
     {
         Intent intent = new Intent(this, DeckCreator.class);
         startActivity(intent);
