@@ -3,6 +3,8 @@ package com.example.temp.trialrun3;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.logging.Logger;
+
 /**
  * Created by temp on 3/4/2018.
  */
@@ -10,18 +12,38 @@ import android.os.Parcelable;
 public class AttackCard implements Card, Parcelable
 {
 
+    private final String cardType = this.getClass().toString();
+    private static final String cardTitle = "Virus Detected!";
+    private static final String actionDescription = "End your turn. \n" +
+            "The next player must take two turns.";
+
+    public static Logger log;
+
     protected AttackCard()
     {
 
     }
 
-    protected AttackCard(Parcel in) {
+    protected AttackCard(Parcel parcel) throws Exception {
+
+        if (!this.cardType.equals(parcel.readString()))
+        {
+          throw new Exception();
+        }
     }
 
     public static final Creator<AttackCard> CREATOR = new Creator<AttackCard>() {
         @Override
-        public AttackCard createFromParcel(Parcel in) {
-            return new AttackCard(in);
+        public AttackCard createFromParcel(Parcel parcel) {
+            try
+            {
+                return new AttackCard(parcel);
+            }
+            catch (Exception e)
+            {
+               log.severe("Attempted creation of an Attack Card from a parcel of different source type"+ e.toString());
+            }
+            return null;
         }
 
         @Override
@@ -36,6 +58,14 @@ public class AttackCard implements Card, Parcelable
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int flags) {
+
+        parcel.writeString(cardType);
+    }
+
+    @Override
+    public void performAction() {
+
+        CardActions.Attack();
     }
 }

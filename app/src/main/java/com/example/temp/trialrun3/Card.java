@@ -6,6 +6,8 @@ package com.example.temp.trialrun3;
 
 interface Card {
 
-    public
+    public String cardTitle = "Card";
+    public String actionDescription = "";
 
+    public void performAction();
 }
