@@ -18,8 +18,8 @@
         </activity>
         <activity android:name=".SelectNumOfPlayers" />
         <activity android:name=".Lobby" />
-        <activity android:name=".deckCreator" />
-        <activity android:name=".chooseDifficulty"></activity>
+        <activity android:name=".DeckCreator" />
+        <activity android:name=".ChooseDifficulty"></activity>
     </application>
 
 </manifest>

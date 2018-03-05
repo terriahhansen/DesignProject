@@ -5,4 +5,7 @@ package com.example.temp.trialrun3;
  */
 
 interface Card {
+
+    public
+
 }

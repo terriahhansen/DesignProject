@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class deckCreator extends AppCompatActivity {
+public class DeckCreator extends AppCompatActivity {
 
     private ArrayList<Card> CardList;
 

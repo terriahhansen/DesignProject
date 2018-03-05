@@ -65,5 +65,5 @@ class CardFactory {
     {
         return new FiveDifferentRuleCard();
     }
-    
+
 }

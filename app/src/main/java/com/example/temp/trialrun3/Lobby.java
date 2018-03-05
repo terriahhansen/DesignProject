@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class Lobby extends AppCompatActivity {
 
@@ -39,7 +35,7 @@ public class Lobby extends AppCompatActivity {
 
     public void fillOpponentList (String Level)
     {
-//        if (chooseDifficulty.EASY.equals(Level))
+//        if (ChooseDifficulty.EASY.equals(Level))
 //        {
 //            for (int i = 1; i <= NumOfOpponents; i++)
 //            {
@@ -51,7 +47,7 @@ public class Lobby extends AppCompatActivity {
 
     public void ChooseCards(View view)
     {
-        Intent intent = new Intent(this, deckCreator.class);
+        Intent intent = new Intent(this, DeckCreator.class);
         startActivity(intent);
     }
 }

@@ -18,7 +18,7 @@ public class ChooseMode extends AppCompatActivity {
 
     public void ChooseSinglePlayer (View view)
     {
-        Intent intent = new Intent(this, chooseDifficulty.class);
+        Intent intent = new Intent(this, ChooseDifficulty.class);
         intent.putExtra(EXTRA_GAMEMODE, SINGLE_PLAYER);
         startActivity(intent);
     }
