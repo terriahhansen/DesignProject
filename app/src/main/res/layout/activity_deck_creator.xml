@@ -14,15 +14,6 @@
         tools:layout_editor_absoluteX="229dp"
         tools:layout_editor_absoluteY="55dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="299dp"
-        android:layout_height="44dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="438dp" />
-
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
@@ -33,18 +24,10 @@
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="94dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Switch"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="174dp" />
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="175dp" />
 
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="93dp"
-        android:layout_height="33dp"
-        android:text="Switch"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="229dp" />
 </android.support.constraint.ConstraintLayout>

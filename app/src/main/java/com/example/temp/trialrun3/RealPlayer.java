@@ -20,9 +20,11 @@ public class RealPlayer implements Player {
     }
     public boolean playCard(Card cardToPlay){
 
+        return false;
     }
     public Card drawCard(){
 
+        return new AttackCard();
     }
     public void addToHand(Card cardToAdd){
         hand.add(cardToAdd);
@@ -33,5 +35,6 @@ public class RealPlayer implements Player {
     }
     public boolean playMultipleCards(Card[] cardsToPlay){
 
+        return false;
     }
 }
