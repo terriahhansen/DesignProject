@@ -18,7 +18,8 @@ public class RealPlayer implements Player {
     public boolean getHost(){
         return isHost;
     }
-    public boolean playCard(Card cardToPlay){
+
+    public void playCard(Card cardToPlay){
 
         return false;
     }
@@ -33,6 +34,7 @@ public class RealPlayer implements Player {
     public void setCanPlay(boolean isActivePlayer){
         canPlay = isActivePlayer;
     }
+
     public boolean playMultipleCards(Card[] cardsToPlay){
 
         return false;

@@ -19,7 +19,7 @@ public class DumbAI implements Player {
     public boolean getHost(){
         return isHost;
     }
-    public boolean playCard(Card cardToPlay){
+    public void playCard(Card cardToPlay){
         hand.remove(cardToPlay);
         discardPile.add(cardToPlay);
         cardToPlay.performAction();
@@ -46,7 +46,7 @@ public class DumbAI implements Player {
         Card cardToPlay = calculator.calculateScore();
         if (cardToPlay != null)
             playCard(cardToPlay);
-        if( drawCard().equals(DeathCard){
+        if( drawCard().equals(DeathCard)){
            if(hand.contains(SafeCard)){
                hand.remove(SafeCard);
                discardPile.add(SafeCard);

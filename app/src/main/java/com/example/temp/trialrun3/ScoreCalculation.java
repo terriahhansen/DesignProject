@@ -7,5 +7,5 @@ import java.util.ArrayList;
  */
 
 public interface ScoreCalculation {
-    Card calculateScore(ArrayList<Card> cardsToCheck);
+    public Card calculateScore();
 }

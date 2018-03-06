@@ -7,17 +7,17 @@ import java.util.ArrayList;
  */
 
 public interface Player {
-    int numOfCards;
-    boolean isAlive;
-    ArrayList<Card> hand;
-    boolean canPlay;
-    boolean isHost;
+    public int numOfCards = 0;
+    public boolean isAlive = false;
+    public ArrayList<Card> hand = new ArrayList<Card>();
+    public boolean canPlay = false;
+    public boolean isHost = false;
 
-    boolean getHost();
-    boolean playCard(Card cardToPlay);
-    Card drawCard();
-    void addToHand(Card cardToAdd);
-    void setCanPlay(boolean isActivePlayer);
-    boolean playMultipleCards(Card[] cardsToPlay);
+    public boolean getHost();
+    public void playCard(Card cardToPlay);
+    public Card drawCard();
+    public void addToHand(Card cardToAdd);
+    public void setCanPlay(boolean isActivePlayer);
+    //public boolean playMultipleCards(Card[] cardsToPlay);
 
 }
