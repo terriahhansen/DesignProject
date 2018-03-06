@@ -6,8 +6,10 @@ package com.example.temp.trialrun3;
 
 interface Card {
 
-    public String cardTitle = "Card";
-    public String actionDescription = "";
+    String cardTitle = "Card";
+    String actionDescription = "";
+    int score = 0;
 
-    public void performAction();
+    void performAction();
+    int getScore();
 }

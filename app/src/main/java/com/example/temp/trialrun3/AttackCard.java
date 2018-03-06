@@ -16,15 +16,12 @@ public class AttackCard implements Card, Parcelable
     private static final String cardTitle = "Virus Detected!";
     private static final String actionDescription = "End your turn. \n" +
             "The next player must take two turns.";
+    private static final int score = 7;
 
-    public static Logger log;
+    private static Logger log;
 
-    protected AttackCard()
-    {
 
-    }
-
-    protected AttackCard(Parcel parcel) throws Exception {
+    private AttackCard(Parcel parcel) throws Exception {
 
         if (!this.cardType.equals(parcel.readString()))
         {
@@ -67,5 +64,10 @@ public class AttackCard implements Card, Parcelable
     public void performAction() {
 
         CardActions.Attack();
+    }
+
+    @Override
+    public int getScore() {
+        return score;
     }
 }

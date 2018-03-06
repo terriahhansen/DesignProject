@@ -9,37 +9,35 @@ import java.util.logging.Logger;
  * Created by Sheena on 2018-03-06.
  */
 
-public class CardLockCard implements Card, Parcelable {
-
+public class AlterTheFutureCard implements Card, Parcelable {
     private final String cardType = this.getClass().toString();
-    private static final String cardTitle = "Locked out of the Lab";
-    private static final String actionDescription = "Select a player to lock their save card for a turn";
-    private static final int score = 4;
-
+    private static final String cardTitle = "Extension";
+    private static final String actionDescription = "View the top three cards of the deck and alter the order";
+    private static final int score = 3;
     private static Logger log;
 
-    private CardLockCard(Parcel parcel) throws Exception{
+    private AlterTheFutureCard(Parcel parcel) throws Exception{
         if (!this.cardType.equals(parcel.readString()))
         {
             throw new Exception();
         }
     }
 
-    public static final Creator<CardLockCard> CREATOR = new Creator<CardLockCard>() {
+    public static final Creator<AlterTheFutureCard> CREATOR = new Creator<AlterTheFutureCard>() {
         @Override
-        public CardLockCard createFromParcel(Parcel parcel) {
+        public AlterTheFutureCard createFromParcel(Parcel in) {
             try{
-                return new CardLockCard(parcel);
+                return new AlterTheFutureCard(in);
             }
             catch (Exception e){
-                log.severe("Attempted creation of a Card Lock Card from a parcel of different source type"+ e.toString());
+                log.severe("Attempted creation of an Alter the Future Card from a parcel of different source type"+ e.toString());
             }
             return null;
         }
 
         @Override
-        public CardLockCard[] newArray(int size) {
-            return new CardLockCard[size];
+        public AlterTheFutureCard[] newArray(int size) {
+            return new AlterTheFutureCard[size];
         }
     };
 

@@ -9,37 +9,36 @@ import java.util.logging.Logger;
  * Created by Sheena on 2018-03-06.
  */
 
-public class CardLockCard implements Card, Parcelable {
+public class TakeACard implements Card, Parcelable {
 
     private final String cardType = this.getClass().toString();
-    private static final String cardTitle = "Locked out of the Lab";
-    private static final String actionDescription = "Select a player to lock their save card for a turn";
-    private static final int score = 4;
-
+    private static final String cardTitle = "Collaboration";
+    private static final String actionDescription = "Take a random card from another player of your choice";
+    private static final int score = 1;
     private static Logger log;
 
-    private CardLockCard(Parcel parcel) throws Exception{
-        if (!this.cardType.equals(parcel.readString()))
+    private TakeACard(Parcel parcel) throws Exception{
+        if(!this.cardType.equals(parcel.readString()))
         {
             throw new Exception();
         }
     }
 
-    public static final Creator<CardLockCard> CREATOR = new Creator<CardLockCard>() {
+    public static final Creator<TakeACard> CREATOR = new Creator<TakeACard>() {
         @Override
-        public CardLockCard createFromParcel(Parcel parcel) {
+        public TakeACard createFromParcel(Parcel in) {
             try{
-                return new CardLockCard(parcel);
+                return new TakeACard(in);
             }
             catch (Exception e){
-                log.severe("Attempted creation of a Card Lock Card from a parcel of different source type"+ e.toString());
+                log.severe("Attempted creation of a Take a Card from a parcel of different source type"+ e.toString());
             }
             return null;
         }
 
         @Override
-        public CardLockCard[] newArray(int size) {
-            return new CardLockCard[size];
+        public TakeACard[] newArray(int size) {
+            return new TakeACard[size];
         }
     };
 
@@ -55,7 +54,7 @@ public class CardLockCard implements Card, Parcelable {
 
     @Override
     public void performAction() {
-
+// do something
     }
 
     @Override
