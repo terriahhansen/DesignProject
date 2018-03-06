@@ -17,8 +17,8 @@ public class SeeTheFutureCard implements Card, Parcelable {
     private static final int score = 2;
     private static Logger log;
 
-    private SeeTheFutureCard(Parcel parcel) throws Exception{
-        if(!this.cardType.equals(parcel.readString())){
+    private SeeTheFutureCard(Parcel parcel) throws Exception {
+        if (!this.cardType.equals(parcel.readString())) {
             throw new Exception();
         }
     }

@@ -21,7 +21,6 @@ public class RealPlayer implements Player {
 
     public void playCard(Card cardToPlay){
 
-        return false;
     }
     public Card drawCard(){
 

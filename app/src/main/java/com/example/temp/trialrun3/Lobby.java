@@ -15,7 +15,7 @@ public class Lobby extends AppCompatActivity {
     private int NumOfOpponents;
     private int addedPlayers =0;
     private static final int chooseCardRequest = 0;
-    private ArrayList<Card> deckCards;
+    private ArrayList<Card> deckCards = new ArrayList<>();
     private TextView textView;
 //    private ArrayList<Player> PlayerList;
 
@@ -55,7 +55,7 @@ public class Lobby extends AppCompatActivity {
     public void chooseCards(View view)
     {
         Intent intent = new Intent(this, DeckCreator.class);
-        startActivityForResult(intent,0);
+        startActivityForResult(intent,chooseCardRequest);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Lobby extends AppCompatActivity {
         {
             case (chooseCardRequest):
             {
-                if (resultCode == DeckCreator.RESULT_OK)
+                if (resultCode == 1)
                 {
                     Map<Integer, Boolean> chosenCardMap = (Map<Integer, Boolean>) childIntent.getSerializableExtra(DeckCreator.checkBoxValueMap);
                     for (Map.Entry<Integer,Boolean> entry : chosenCardMap.entrySet())
@@ -76,8 +76,9 @@ public class Lobby extends AppCompatActivity {
             break;
         }
         String createdCardTypes = "";
-        for (Card c : deckCards)
+        for (int i = 0; i<deckCards.size(); i++)
         {
+            Card c = deckCards.get(i);
             createdCardTypes += c.getClass().toString();
         }
         textView.setText(createdCardTypes);
