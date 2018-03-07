@@ -17,7 +17,6 @@ public class AttackCard implements Card, Parcelable
     private static final String actionDescription = "End your turn. \n" +
             "The next player must take two turns.";
     private static final int score = 7;
-
     private static Logger log;
 
 

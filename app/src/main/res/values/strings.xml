@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">TrialRun3</string>
-    <string name="SinglePlayerMode">Single Player</string>
-    <string name="oneOpponent">1</string>
-    <string name="twoOpponents">2</string>
     <string name="Choose_cards">Choose Deck</string>
     <string name="Start_game">Start</string>
+    <string name="chooseDifficultyMessage">Select a Difficulty</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="chooseModeMessage">Select a Mode</string>
+    <string name="mode_single">Single Player</string>
+    <string name="mode_multiplay">Multiplayer</string>
+    <string name="choosePlayerMessage">Select The Number of Opponents</string>
+    <string name="select1">1</string>
+    <string name="select2">2</string>
+    <string name="select3">3</string>
+    <string name="select4">4</string>
+    <string name="select5">5</string>
+
 </resources>
