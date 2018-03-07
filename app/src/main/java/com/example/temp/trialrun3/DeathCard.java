@@ -13,8 +13,10 @@ public class DeathCard implements Card, Parcelable {
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Failed Your Exam";
     private static final String actionDescription = "Please repeat the term again next year";
-
     private static Logger log;
+
+    public DeathCard() {
+    }
 
     private DeathCard(Parcel parcel) throws Exception{
         if (!this.cardType.equals(parcel.readString()))

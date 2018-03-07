@@ -15,6 +15,9 @@ public class SkipYourTurnCard implements Card, Parcelable {
     private static final int score = 6;
     private static Logger log;
 
+    public SkipYourTurnCard() {
+    }
+
     private SkipYourTurnCard(Parcel parcel) throws Exception {
         if (!this.cardType.equals(parcel.readString()))
         {

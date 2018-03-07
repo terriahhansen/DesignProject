@@ -15,8 +15,10 @@ public class CardLockCard implements Card, Parcelable {
     private static final String cardTitle = "Locked out of the Lab";
     private static final String actionDescription = "Select a player to lock their save card for a turn";
     private static final int score = 4;
-
     private static Logger log;
+
+    public CardLockCard() {
+    }
 
     private CardLockCard(Parcel parcel) throws Exception{
         if (!this.cardType.equals(parcel.readString()))

@@ -14,8 +14,11 @@ public class DiscardHandCard implements Card, Parcelable {
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "The House Always Wins";
     private static final String actionDescription = "Discard your entire hand";
-
     private static Logger log;
+
+    public DiscardHandCard() {
+    }
+
     private DiscardHandCard(Parcel parcel) throws Exception{
         if (!this.cardType.equals(parcel.readString()))
         {

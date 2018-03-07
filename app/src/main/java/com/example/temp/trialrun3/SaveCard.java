@@ -15,6 +15,9 @@ public class SaveCard implements Card, Parcelable {
     private static final String actionDescription = "Saved by the bell(curve)";
     private static Logger log;
 
+    public SaveCard() {
+    }
+
     private SaveCard(Parcel parcel) throws Exception{
         if (!this.cardType.equals(parcel.readString()))
         {

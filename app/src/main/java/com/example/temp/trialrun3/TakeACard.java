@@ -17,6 +17,9 @@ public class TakeACard implements Card, Parcelable {
     private static final int score = 1;
     private static Logger log;
 
+    public TakeACard() {
+    }
+
     private TakeACard(Parcel parcel) throws Exception{
         if(!this.cardType.equals(parcel.readString()))
         {
