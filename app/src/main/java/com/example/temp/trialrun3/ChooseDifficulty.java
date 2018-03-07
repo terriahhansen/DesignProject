@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class ChooseDifficulty extends AppCompatActivity {
 
@@ -11,6 +12,7 @@ public class ChooseDifficulty extends AppCompatActivity {
     public static final String EXTRA_DIFFICULTY = "com.example.temp.trialrun3.ChooseDifficulty";
     private static final String EASY_MODE = "Easy";
     private static final String HARD_MODE = "Hard";
+    private static final String HARD_UNSUPPORTED = "Hard difficulty not yet supported";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +27,10 @@ public class ChooseDifficulty extends AppCompatActivity {
         intent.putExtra(ChooseMode.EXTRA_GAMEMODE, mode);
         intent.putExtra(EXTRA_DIFFICULTY,EASY_MODE);
         startActivity(intent);
+    }
+
+    public void chooseHard (View view)
+    {
+        Toast.makeText(this, HARD_UNSUPPORTED, Toast.LENGTH_SHORT).show();
     }
 }
