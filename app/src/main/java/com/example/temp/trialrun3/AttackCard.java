@@ -20,6 +20,10 @@ public class AttackCard implements Card, Parcelable
     private static Logger log;
 
 
+    public AttackCard()
+    {
+
+    }
     private AttackCard(Parcel parcel) throws Exception {
 
         if (!this.cardType.equals(parcel.readString()))

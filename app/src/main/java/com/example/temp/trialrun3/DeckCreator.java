@@ -42,6 +42,11 @@ public class DeckCreator extends AppCompatActivity {
                 {
                     confirmButton.setClickable(false);
                     numOfCardsSelected--;
+                    for (int i = 0; i<checkBoxes.size(); i++)
+                    {
+                        CheckBox c = checkBoxes.get(i);
+                        c.setClickable(true);
+                    }
                 }
                 if (numOfCardsSelected == maxNumOfCards)
                 {
@@ -64,6 +69,32 @@ public class DeckCreator extends AppCompatActivity {
         checkBoxes.add(checkBox1);
         CheckBox checkBox2 = findViewById(R.id.checkBox2);
         checkBox2.setId(idNum++);
+        checkBox2.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox2);
+        CheckBox checkBox3 = findViewById(R.id.checkBox3);
+        checkBox3.setId(idNum++);
+        checkBox3.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox3);
+        CheckBox checkBox4 = findViewById(R.id.checkBox4);
+        checkBox4.setId(idNum++);
+        checkBox4.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox4);
+        CheckBox checkBox5 = findViewById(R.id.checkBox5);
+        checkBox5.setId(idNum++);
+        checkBox5.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox5);
+        CheckBox checkBox6 = findViewById(R.id.checkBox6);
+        checkBox6.setId(idNum++);
+        checkBox6.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox6);
+        CheckBox checkBox7 = findViewById(R.id.checkBox7);
+        checkBox7.setId(idNum++);
+        checkBox7.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox7);
+        CheckBox checkBox8 = findViewById(R.id.checkBox8);
+        checkBox8.setId(idNum++);
+        checkBox8.setOnCheckedChangeListener(checkBoxListener);
+        checkBoxes.add(checkBox8);
         //etc...
 
     }
@@ -82,6 +113,5 @@ public class DeckCreator extends AppCompatActivity {
         setResult(deckConfirm_ActionCode, intent);
         finish();
     }
-
 
 }
