@@ -1,6 +1,7 @@
 package com.example.temp.trialrun3;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class ChooseMode extends AppCompatActivity {
 
     public void chooseMultiplayer(View view)
     {
+//        Snackbar.make(view, MULTIPLAYER_UNSUPPORTED, Snackbar.LENGTH_SHORT).show();
         Toast.makeText(this,MULTIPLAYER_UNSUPPORTED , Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,7 +1,9 @@
-package com.example.temp.trialrun3;
+package com.example.temp.trialrun3.Cards;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.temp.trialrun3.CardActions;
 
 import java.util.logging.Logger;
 

@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.temp.trialrun3.Cards.AttackCard;
+import com.example.temp.trialrun3.Cards.Card;
+
 import java.util.ArrayList;
 import java.util.Map;
 

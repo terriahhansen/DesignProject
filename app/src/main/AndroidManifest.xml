@@ -19,7 +19,11 @@
         <activity android:name=".SelectNumOfPlayers" />
         <activity android:name=".Lobby" />
         <activity android:name=".DeckCreator" />
-        <activity android:name=".ChooseDifficulty"></activity>
+        <activity android:name=".ChooseDifficulty" />
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

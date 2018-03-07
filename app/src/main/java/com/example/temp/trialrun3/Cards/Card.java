@@ -1,10 +1,10 @@
-package com.example.temp.trialrun3;
+package com.example.temp.trialrun3.Cards;
 
 /**
  * Created by temp on 3/4/2018.
  */
 
-interface Card {
+public interface Card {
 
     String cardTitle = "Card";
     String actionDescription = "";
