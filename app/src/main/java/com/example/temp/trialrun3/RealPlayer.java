@@ -11,12 +11,34 @@ import java.util.ArrayList;
 
 public class RealPlayer implements Player {
     private int numOfCards;
+    private int playerNumber;
     private boolean isAlive;
     private ArrayList<Card> hand;
     private boolean canPlay;
     private boolean isHost;
 
-    public RealPlayer() {
+    public RealPlayer(int playerNumber) {
+        this.playerNumber = playerNumber;
+        if(playerNumber==0)
+        {
+            this.isHost = true;
+        }
+    }
+
+    public String toString()
+    {
+        StringBuilder playerRepresentation = new StringBuilder().append("Player ")
+                .append(Integer.toString(playerNumber)).append(":                    ");
+        if (isHost)
+        {
+            playerRepresentation.append("YOU");
+        }
+        else
+        {
+            playerRepresentation.append("CONNECTED PLAYER");
+        }
+
+        return playerRepresentation.toString();
     }
     public boolean getHost(){
         return isHost;

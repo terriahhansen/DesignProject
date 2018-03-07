@@ -10,8 +10,8 @@ public class ChooseDifficulty extends AppCompatActivity {
 
     private String mode;
     public static final String EXTRA_DIFFICULTY = "com.example.temp.trialrun3.ChooseDifficulty";
-    private static final String EASY_MODE = "Easy";
-    private static final String HARD_MODE = "Hard";
+    public static final String EASY_MODE = "Easy";
+    public static final String HARD_MODE = "Hard";
     private static final String HARD_UNSUPPORTED = "Hard difficulty not yet supported";
 
     @Override

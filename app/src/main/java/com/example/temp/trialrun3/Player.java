@@ -20,6 +20,7 @@ public interface Player {
     public Card drawCard();
     public void addToHand(Card cardToAdd);
     public void setCanPlay(boolean isActivePlayer);
+    public String toString();
     //public boolean playMultipleCards(Card[] cardsToPlay);
 
 }
