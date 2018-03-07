@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,9 +27,40 @@ public class DeckCreator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck_creator);
+        final Button confirmButton = findViewById(R.id.button7);
+        confirmButton.setClickable(false);
+
+        CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if (isChecked)
+                {
+                    numOfCardsSelected++;
+                }
+                else
+                {
+                    confirmButton.setClickable(false);
+                    numOfCardsSelected--;
+                }
+                if (numOfCardsSelected == maxNumOfCards)
+                {
+                    confirmButton.setClickable(true);
+                    for (int i = 0; i<checkBoxes.size(); i++)
+                    {
+                        CheckBox c = checkBoxes.get(i);
+                        if (!c.isChecked())
+                        {
+                            c.setClickable(false);
+                        }
+                    }
+                }
+            }
+        };
 
         CheckBox checkBox1 = findViewById(R.id.checkBox);
         checkBox1.setId(idNum++);
+        checkBox1.setOnCheckedChangeListener(checkBoxListener);
         checkBoxes.add(checkBox1);
         CheckBox checkBox2 = findViewById(R.id.checkBox2);
         checkBox2.setId(idNum++);
@@ -42,16 +75,8 @@ public class DeckCreator extends AppCompatActivity {
         {
             CheckBox c = checkBoxes.get(j);
             checkBoxValues.put(c.getId(), c.isChecked());
-            if (c.isChecked())
-            {
-                numOfCardsSelected++;
-            }
         }
 
-        if(numOfCardsSelected!=5)
-        {
-            
-        }
         Intent intent = new Intent(this, Lobby.class);
         intent.putExtra(checkBoxValueMap, (Serializable) checkBoxValues);
         setResult(deckConfirm_ActionCode, intent);
