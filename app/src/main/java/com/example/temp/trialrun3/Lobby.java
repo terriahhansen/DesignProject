@@ -73,6 +73,7 @@ public class Lobby extends AppCompatActivity {
             intent.putExtra(ChooseMode.EXTRA_GAMEMODE, gameMode);
             intent.putExtra(ChooseDifficulty.EXTRA_DIFFICULTY, difficulty);
             intent.putExtra(SelectNumOfPlayers.EXTRA_NUMOPPONENTS, numOfOpponents);
+            startActivity(intent);
         }
     }
 

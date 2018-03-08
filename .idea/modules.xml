@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://E:\AndroidProjects\TrialRun3\DesignProject.iml" filepath="E:\AndroidProjects\TrialRun3\DesignProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TrialRun3.iml" filepath="$PROJECT_DIR$/TrialRun3.iml" />
       <module fileurl="file://C:\Users\Sheena\ENGI5895\designProject\TrialRun3.iml" filepath="C:\Users\Sheena\ENGI5895\designProject\TrialRun3.iml" />
       <module fileurl="file://C:\Users\Sheena\ENGI5895\DesignProject\TrialRun3.iml" filepath="C:\Users\Sheena\ENGI5895\DesignProject\TrialRun3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/designProject.iml" filepath="$PROJECT_DIR$/designProject.iml" />
       <module fileurl="file://E:\AndroidProjects\TrialRun3\designProject.iml" filepath="E:\AndroidProjects\TrialRun3\designProject.iml" />
     </modules>
   </component>
