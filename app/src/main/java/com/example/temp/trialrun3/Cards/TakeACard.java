@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class TakeACard implements Card, Parcelable {
 
+    public static final int ID_NUMBER = 3;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Collaboration";
     private static final String actionDescription = "Take a random card from another player of your choice";

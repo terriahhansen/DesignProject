@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class AttackCard implements Card, Parcelable
 {
-
+    public static final int ID_NUMBER = 1;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Virus Detected!";
     private static final String actionDescription = "End your turn. \n" +

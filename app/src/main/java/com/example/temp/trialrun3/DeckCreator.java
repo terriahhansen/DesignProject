@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class DeckCreator extends AppCompatActivity {
 
-    private static final int deckConfirm_ActionCode =1;
+    public static final int DECK_CONFIRM_ACTION_CODE =1;
     private int numOfCardsSelected =0;
     private static final int maxNumOfCards = 5;
     private Map <Integer, Boolean> checkBoxValues = new HashMap<>();
@@ -110,7 +110,7 @@ public class DeckCreator extends AppCompatActivity {
 
         Intent intent = new Intent(this, Lobby.class);
         intent.putExtra(checkBoxValueMap, (Serializable) checkBoxValues);
-        setResult(deckConfirm_ActionCode, intent);
+        setResult(DECK_CONFIRM_ACTION_CODE, intent);
         finish();
     }
 

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class SeeTheFutureCard implements Card, Parcelable {
 
+    public static final int ID_NUMBER = 6;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "See the Future";
     private static final String actionDescription = "Look at the top three cards of the deck";

@@ -9,6 +9,8 @@ import java.util.logging.Logger;
  */
 
 public class SkipYourTurnCard implements Card, Parcelable {
+
+    public static final int ID_NUMBER = 7;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Fell Asleep In Class";
     private static final String actionDescription = "Skip Your Turn";

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class DiscardHandCard implements Card, Parcelable {
 
+    public static final int ID_NUMBER = 4;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "The House Always Wins";
     private static final String actionDescription = "Discard your entire hand";

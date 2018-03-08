@@ -10,6 +10,8 @@ import java.util.logging.Logger;
  */
 
 public class AlterTheFutureCard implements Card, Parcelable {
+
+    public static final int ID_NUMBER = 5;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Extension";
     private static final String actionDescription = "View the top three cards of the deck and alter the order";

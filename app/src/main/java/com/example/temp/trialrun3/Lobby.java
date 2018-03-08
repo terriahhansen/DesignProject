@@ -8,8 +8,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.temp.trialrun3.Cards.AlterTheFutureCard;
 import com.example.temp.trialrun3.Cards.AttackCard;
 import com.example.temp.trialrun3.Cards.Card;
+import com.example.temp.trialrun3.Cards.CardLockCard;
+import com.example.temp.trialrun3.Cards.DiscardHandCard;
+import com.example.temp.trialrun3.Cards.SeeTheFutureCard;
+import com.example.temp.trialrun3.Cards.SkipYourTurnCard;
+import com.example.temp.trialrun3.Cards.TakeACard;
+import com.example.temp.trialrun3.Cards.TransformationCard;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -22,9 +29,12 @@ public class Lobby extends AppCompatActivity {
     private int addedPlayers =0; //for multiplayer
     private static final int hostId = 0;
     private static final int chooseCardRequest = 0;
+    public static final String EXTRA_CARD_LIST = "com.example.trialrun3.Lobby.CARD_LIST";
+    public static final String EXTRA_PLAYER_LIST = "com.example.trialrun.Lobby.PLAYER_LIST";
     private ArrayList<Card> deckCards = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
     private static final String NO_DECK_MESSAGE = "Please choose the cards you wish to include in the game deck before continuing";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,11 @@ public class Lobby extends AppCompatActivity {
             intent.putExtra(ChooseMode.EXTRA_GAMEMODE, gameMode);
             intent.putExtra(ChooseDifficulty.EXTRA_DIFFICULTY, difficulty);
             intent.putExtra(SelectNumOfPlayers.EXTRA_NUMOPPONENTS, numOfOpponents);
+<<<<<<< Updated upstream
+=======
+            intent.putExtra(EXTRA_CARD_LIST, deckCards);
+            intent.putExtra(EXTRA_PLAYER_LIST, playerList);
+>>>>>>> Stashed changes
             startActivity(intent);
         }
     }
@@ -89,7 +104,7 @@ public class Lobby extends AppCompatActivity {
         {
             case (chooseCardRequest):
             {
-                if (resultCode == 1)
+                if (resultCode == DeckCreator.DECK_CONFIRM_ACTION_CODE)
                 {
                     deckCards.clear();
                     Map<Integer, Boolean> chosenCardMap = (Map<Integer, Boolean>) childIntent.getSerializableExtra(DeckCreator.checkBoxValueMap);
@@ -106,20 +121,63 @@ public class Lobby extends AppCompatActivity {
 
     private void addAppropriateCard(Map.Entry<Integer, Boolean> entry) {
         int key = entry.getKey();
+        CardFactory cardFactory = new CardFactory();
         switch (key)
         {
-            case (1):
+            case (AttackCard.ID_NUMBER):
             {
                 if (entry.getValue())
                 {
-                    deckCards.add(new AttackCard());
+                    deckCards.add(cardFactory.makeAttackCard());
                 }
             }
-//            case (2):
+            case (CardLockCard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeCardLockCard());
+                }
+            }
+            case (TakeACard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeTakeACard());
+                }
+            }
+            case (DiscardHandCard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeDiscardHandCard());
+                }
+            }
+            case (AlterTheFutureCard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeAlterTheFutureCard());
+                }
+            }
+            case (SeeTheFutureCard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeSeeTheFutureCard());
+                }
+            }
+            case (SkipYourTurnCard.ID_NUMBER):
+            {
+                if (entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeSkipTurnCard());
+                }
+            }
+//            case (TransformationCard.ID_NUMBER):
 //            {
-//                if (entry.getValue())
+//                if(entry.getValue())
 //                {
-//                    deckCards.add(new )
+//                    deckCards.add(cardFactory.makeTransformationCard());
 //                }
 //            }
         }

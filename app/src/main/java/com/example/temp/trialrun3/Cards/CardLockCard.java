@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class CardLockCard implements Card, Parcelable {
 
+    public static final int ID_NUMBER = 2;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Locked out of the Lab";
     private static final String actionDescription = "Select a player to lock their save card for a turn";
