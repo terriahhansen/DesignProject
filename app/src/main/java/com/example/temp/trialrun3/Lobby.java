@@ -30,7 +30,7 @@ public class Lobby extends AppCompatActivity {
     private static final int hostId = 0;
     private static final int chooseCardRequest = 0;
     public static final String EXTRA_CARD_LIST = "com.example.trialrun3.Lobby.CARD_LIST";
-    public static final String EXTRA_PLAYER_LIST = "com.example.trialrun.Lobby.PLAYER_LIST";
+    public static final String EXTRA_PLAYER_LIST = "com.example.trialrun3.Lobby.PLAYER_LIST";
     private ArrayList<Card> deckCards = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
     private static final String NO_DECK_MESSAGE = "Please choose the cards you wish to include in the game deck before continuing";
@@ -127,6 +127,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeAttackCard());
                 }
+                break;
             }
             case (CardLockCard.ID_NUMBER):
             {
@@ -134,6 +135,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeCardLockCard());
                 }
+                break;
             }
             case (TakeACard.ID_NUMBER):
             {
@@ -141,6 +143,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeTakeACard());
                 }
+                break;
             }
             case (DiscardHandCard.ID_NUMBER):
             {
@@ -148,6 +151,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeDiscardHandCard());
                 }
+                break;
             }
             case (AlterTheFutureCard.ID_NUMBER):
             {
@@ -155,6 +159,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeAlterTheFutureCard());
                 }
+                break;
             }
             case (SeeTheFutureCard.ID_NUMBER):
             {
@@ -162,6 +167,7 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeSeeTheFutureCard());
                 }
+                break;
             }
             case (SkipYourTurnCard.ID_NUMBER):
             {
@@ -169,14 +175,16 @@ public class Lobby extends AppCompatActivity {
                 {
                     deckCards.add(cardFactory.makeSkipTurnCard());
                 }
+                break;
             }
-//            case (TransformationCard.ID_NUMBER):
-//            {
-//                if(entry.getValue())
-//                {
-//                    deckCards.add(cardFactory.makeTransformationCard());
-//                }
-//            }
+            case (TransformationCard.ID_NUMBER):
+            {
+                if(entry.getValue())
+                {
+                    deckCards.add(cardFactory.makeTransformationCard());
+                }
+                break;
+            }
         }
     }
 }
