@@ -1,5 +1,7 @@
 package com.example.temp.trialrun3;
 
+import android.os.Parcelable;
+
 import com.example.temp.trialrun3.Cards.Card;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * Created by Sheena on 2018-03-04.
  */
 
-public interface Player {
+public interface Player extends Parcelable{
     public int numOfCards = 0;
     public boolean isAlive = false;
     public ArrayList<Card> hand = new ArrayList<Card>();

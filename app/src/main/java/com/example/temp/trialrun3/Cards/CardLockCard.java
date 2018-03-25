@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  * Created by Sheena on 2018-03-06.
  */
 
-public class CardLockCard implements Card, Parcelable {
+public class CardLockCard implements Card {
 
     public static final int ID_NUMBER = 2;
     private final String cardType = this.getClass().toString();

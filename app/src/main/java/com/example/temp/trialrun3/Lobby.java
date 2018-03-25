@@ -31,7 +31,7 @@ public class Lobby extends AppCompatActivity {
     private static final int chooseCardRequest = 0;
     public static final String EXTRA_CARD_LIST = "com.example.trialrun3.Lobby.CARD_LIST";
     public static final String EXTRA_PLAYER_LIST = "com.example.trialrun3.Lobby.PLAYER_LIST";
-    private ArrayList<Card> deckCards = new ArrayList<>();
+    private ArrayList<Card> deckCards = new ArrayList<Card>();
     private ArrayList<Player> playerList = new ArrayList<>();
     private static final String NO_DECK_MESSAGE = "Please choose the cards you wish to include in the game deck before continuing";
 
@@ -83,8 +83,8 @@ public class Lobby extends AppCompatActivity {
             intent.putExtra(ChooseMode.EXTRA_GAMEMODE, gameMode);
             intent.putExtra(ChooseDifficulty.EXTRA_DIFFICULTY, difficulty);
             intent.putExtra(SelectNumOfPlayers.EXTRA_NUMOPPONENTS, numOfOpponents);
-            intent.putExtra(EXTRA_CARD_LIST, deckCards);
-            intent.putExtra(EXTRA_PLAYER_LIST, playerList);
+            intent.putParcelableArrayListExtra(EXTRA_CARD_LIST, deckCards);
+            intent.putParcelableArrayListExtra(EXTRA_PLAYER_LIST, playerList);
             startActivity(intent);
         }
     }

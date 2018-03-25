@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by Sheena on 2018-03-04.
  */
 
-public class DumbAI implements Player, Parcelable {
+public class DumbAI implements AI, Parcelable {
     private int numOfCards;
     private int playerNumber;
     private boolean isAlive = true;
@@ -59,6 +59,10 @@ public class DumbAI implements Player, Parcelable {
         cardToPlay.performAction();
     }
     public Card drawCard(){
+
+//         should probably be :
+//         return Deck.getDeck().draw();
+
 //        Card cardDrawn = deck.get(0);
 //        addToHand(cardDrawn);
 //        deck.remove(0);
