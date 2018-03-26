@@ -21,8 +21,8 @@
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +30,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout">
 
+        <LinearLayout
+            android:id="@+id/handView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
     </HorizontalScrollView>
 
     <Button
@@ -97,5 +102,29 @@
         app:layout_constraintStart_toEndOf="@+id/player4Button"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/playCardButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:onClick="playCard"
+        android:text="@string/cardConfirm"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="32dp" />
+
+    <Button
+        android:id="@+id/drawCardButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:onClick="drawCard"
+        android:text="@string/drawCard"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="32dp" />
 
 </android.support.constraint.ConstraintLayout>

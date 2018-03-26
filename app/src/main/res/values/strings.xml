@@ -16,5 +16,7 @@
     <string name="select5">5</string>
     <string name="deckCreatorMessage">Select 5 cards</string>
     <string name="deckConfirm">Confirm</string>
+    <string name="cardConfirm">Play Card</string>
+    <string name="drawCard">Draw Card</string>
 
 </resources>

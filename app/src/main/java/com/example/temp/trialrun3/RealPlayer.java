@@ -1,7 +1,15 @@
 package com.example.temp.trialrun3;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.temp.trialrun3.Cards.AttackCard;
 import com.example.temp.trialrun3.Cards.Card;
@@ -12,7 +20,7 @@ import java.util.ArrayList;
  * Created by Sheena on 2018-03-04.
  */
 
-public class RealPlayer implements Player, Parcelable{
+public class RealPlayer implements Player, Parcelable {
     private int numOfCards;
     private int playerNumber;
     private boolean isAlive;
