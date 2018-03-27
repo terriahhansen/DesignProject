@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class Deck {
 
-
     private Logger log;
     private static final Deck deck = null;      //singleton
     private ArrayList<Card> deckCards = null;
@@ -62,6 +61,8 @@ public class Deck {
             log.severe("there are no cards left in the deck to draw. this is an error state, the game should be over.");
             return null;
         }
-
+    }
+    public ArrayList<Card> getDeckCards(){
+        return deckCards;
     }
 }

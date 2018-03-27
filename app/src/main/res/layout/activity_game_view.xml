@@ -13,7 +13,7 @@
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -107,7 +107,7 @@
         android:id="@+id/playCardButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="32dp"
         android:onClick="playCard"
         android:text="@string/cardConfirm"
@@ -119,12 +119,37 @@
         android:id="@+id/drawCardButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="32dp"
         android:onClick="drawCard"
         android:text="@string/drawCard"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="32dp" />
+
+    <Button
+        android:id="@+id/deckButton"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/drawCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player4Button"
+        android:layout_marginRight="60dp" />
+
+    <Button
+        android:id="@+id/discardPileButton"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="32dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/playCardButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player2Button"
+        android:layout_marginLeft="60dp" />
 
 </android.support.constraint.ConstraintLayout>

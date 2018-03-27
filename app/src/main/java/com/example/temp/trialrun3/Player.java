@@ -24,5 +24,6 @@ public interface Player extends Parcelable{
     public void setCanPlay(boolean isActivePlayer);
     public String toString();
     //public boolean playMultipleCards(Card[] cardsToPlay);
+    public ArrayList<Card> getHand();
 
 }

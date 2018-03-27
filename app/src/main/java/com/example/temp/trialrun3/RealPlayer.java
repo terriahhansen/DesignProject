@@ -80,8 +80,9 @@ public class RealPlayer implements Player, Parcelable {
 
     }
     public Card drawCard(){
-
-        return new AttackCard();
+        Card c = Deck.getDeck().draw();
+        addToHand(c);
+        return c;
     }
     public void addToHand(Card cardToAdd){
         hand.add(cardToAdd);
@@ -109,5 +110,9 @@ public class RealPlayer implements Player, Parcelable {
         parcel.writeByte((byte) (canPlay ? 1 : 0));
         parcel.writeByte((byte) (isHost ? 1 : 0));
         parcel.writeSerializable(hand);
+    }
+
+    public ArrayList<Card> getHand(){
+        return hand;
     }
 }

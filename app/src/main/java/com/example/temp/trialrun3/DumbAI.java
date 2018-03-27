@@ -109,6 +109,10 @@ public class DumbAI implements AI, Parcelable {
         parcel.writeByte((byte) (isHost ? 1 : 0));
         parcel.writeSerializable(hand);
     }
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+
 
 //    }
 }
