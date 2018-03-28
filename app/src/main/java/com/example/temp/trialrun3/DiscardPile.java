@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class DiscardPile {
-    private static final DiscardPile discardPile = null;      //singleton
+    private static DiscardPile discardPile = null;      //singleton
     private ArrayList<Card> discardPileCards = null;
 
     private DiscardPile() {
@@ -19,7 +19,8 @@ public class DiscardPile {
     public static DiscardPile getDiscardPile()
     {
         if (discardPile == null) {
-            return new DiscardPile();
+            discardPile = new DiscardPile();
+            return discardPile;
         }
         else {
             return discardPile;

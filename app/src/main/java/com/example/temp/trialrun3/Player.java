@@ -11,17 +11,22 @@ import java.util.ArrayList;
  */
 
 public interface Player extends Parcelable{
-    public int numOfCards = 0;
-    public boolean isAlive = false;
-    public ArrayList<Card> hand = new ArrayList<Card>();
-    public boolean canPlay = false;
-    public boolean isHost = false;
 
-    public boolean getHost();
+    int numOfCards = 0;
+    boolean isAlive = true;
+    ArrayList<Card> hand = new ArrayList<Card>();
+    boolean canPlay = false;
+    boolean isHost = false;
+
+    public boolean isHost();
+    public void setIsHost(boolean flag);
+    public void setIsAlive(boolean flag);
+    public boolean isAlive();
     public void playCard(Card cardToPlay);
-    public Card drawCard();
+    public Card drawCard(String gameMode);
     public void addToHand(Card cardToAdd);
     public void setCanPlay(boolean isActivePlayer);
+    public boolean canPlay();
     public String toString();
     //public boolean playMultipleCards(Card[] cardsToPlay);
     public ArrayList<Card> getHand();

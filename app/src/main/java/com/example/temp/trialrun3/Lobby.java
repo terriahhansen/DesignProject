@@ -61,7 +61,9 @@ public class Lobby extends AppCompatActivity {
     public void fillPlayerList(String Level)
     {
         PlayerFactory playerFactory = new PlayerFactory();
-        playerList.add(playerFactory.createRealPlayer(hostId));
+        Player host = playerFactory.createRealPlayer(hostId);
+        host.setIsHost(true);
+        playerList.add(host);
         if (ChooseDifficulty.EASY_MODE.equals(Level))
         {
             for (int i = 1; i <= numOfOpponents; i++)

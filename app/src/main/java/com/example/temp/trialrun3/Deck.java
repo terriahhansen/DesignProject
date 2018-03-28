@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Deck {
 
     private Logger log;
-    private static final Deck deck = null;      //singleton
+    private static Deck deck = null;      //singleton
     private ArrayList<Card> deckCards = null;
 
     private Deck()
@@ -26,7 +26,8 @@ public class Deck {
     {
         if (deck == null)
         {
-            return new Deck();
+            deck = new Deck();
+            return deck;
         }
         else
         {

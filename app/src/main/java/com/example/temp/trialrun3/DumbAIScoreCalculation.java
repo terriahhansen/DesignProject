@@ -12,12 +12,12 @@ public class DumbAIScoreCalculation implements ScoreCalculation {
 
     private ArrayList<Card> cardsToCheck;
 
-    public DumbAIScoreCalculation(ArrayList<Card> hand) {
+    public DumbAIScoreCalculation() {
 
-        cardsToCheck = hand;
     }
 
-    public Card calculateScore(){
+    public Card calculateScore(ArrayList<Card> hand){
+        cardsToCheck = hand;
         Card cardSelected=cardsToCheck.get(0);
         if  (cardSelected != null){
             for (int i=0; i<cardsToCheck.size() ; i++){

@@ -1,11 +1,9 @@
 package com.example.temp.trialrun3;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +30,6 @@ import com.example.temp.trialrun3.Cards.TakeACard;
 import com.example.temp.trialrun3.Cards.TransformationCard;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -42,11 +39,15 @@ public class GameView extends AppCompatActivity {
 
     private int numOfOpp;
     private int startingHandSize = 4;
+    protected String gameMode;
     private ArrayList<Button> playersShown = new ArrayList<>();
     private ArrayList<Card> cardList = new ArrayList<Card>();
     public Deck deck = Deck.getDeck();  //singleton
     private ArrayList<Player> playerList = new ArrayList<Player>();
     private ArrayList<CheckBox> playerHostCards = new ArrayList<CheckBox>();
+    private Player currentPlayer;
+    private Button drawCardButton;
+    private Button playCardButton;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -54,22 +55,83 @@ public class GameView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_view);
         numOfOpp = getIntent().getIntExtra(SelectNumOfPlayers.EXTRA_NUMOPPONENTS,0);
-        int numOfPlayers = numOfOpp++;
+        int numOfPlayers = numOfOpp+1;
         cardList = getIntent().getParcelableArrayListExtra(Lobby.EXTRA_CARD_LIST);
         playerList = getIntent().getParcelableArrayListExtra(Lobby.EXTRA_PLAYER_LIST);
+        gameMode = getIntent().getStringExtra(ChooseMode.EXTRA_GAMEMODE);
+        drawCardButton = findViewById(R.id.drawCardButton);
+        playCardButton = findViewById(R.id.playCardButton);
+
 
         opponentButtonSetup();
         setupDeckAndInitialPlayerHands(numOfPlayers);
+        initializeButtons();
+        startTurnRotation();
 
+    }
+
+
+    private void startTurnRotation()
+    {
+        Thread turnRotater = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initiateTurnSequence();
+            }
+        });
+        turnRotater.start();
+    }
+
+    private void initiateTurnSequence()
+    {
+        for (int i=0; i<playerList.size(); i++)
+        {
+            Player p = playerList.get(i);
+            if(!p.isAlive())
+            {
+                playerList.remove(p);
+                break;
+            }
+            currentPlayer = p;          //check that at this point the play button doesnt work
+            p.setCanPlay(true);         //check that this also makes current player can play to be true
+            while (p.canPlay())
+            {
+                if (p instanceof RealPlayer)
+                {
+                    if (p.isHost())
+                    {
+                        drawCardButton.setClickable(true);
+                    }
+                    else
+                    {
+                        //for multiplayer
+                    }
+                }
+                else if (p instanceof AI)
+                {
+                    drawCardButton.setClickable(false);
+                    ((AI) p).performTurnAlgorithm(this);
+                }
+            }
+
+        }
+        if (playerList.size()>1)
+        {
+            initiateTurnSequence();
+        }
+    }
+
+    private void initializeButtons() {
+        Button deckButton;
         CompoundButton.OnCheckedChangeListener listener = getListener();
 
         for ( CheckBox c : playerHostCards){
             c.setOnCheckedChangeListener(listener);
         }
-        Button button = findViewById(R.id.deckButton);
+        deckButton = findViewById(R.id.deckButton);
         int deckSize = deck.getDeckCards().size();
-        button.setText(String.valueOf(deckSize));
-
+        deckButton.setText(String.valueOf(deckSize));
+        drawCardButton.setClickable(false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -105,7 +167,7 @@ public class GameView extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void displayCards(Player player, Card card){
-       if ( player == playerList.get(0)) {
+       if ( player  instanceof RealPlayer) {
            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.handView);
            CheckBox checkBox = new CheckBox(this);
            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT,1.0f);
@@ -265,14 +327,21 @@ public class GameView extends AppCompatActivity {
         }
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void callDraw()
+    {
+        drawCard(this.getCurrentFocus());
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void drawCard(View view){
-        Player p = playerList.get(0);
-        Card c = deck.draw();
-        p.addToHand(c);
+        Player p = currentPlayer;
+        Card c = p.drawCard(gameMode);
         displayCards(p, c);
         Button b = findViewById(R.id.deckButton);
         subtractCardNum(b);
+        currentPlayer.setCanPlay(false);
     }
 
     private void addCardNum(Button button){
@@ -288,13 +357,14 @@ public class GameView extends AppCompatActivity {
     }
 
     public void playCard(View view){
-        Player p = playerList.get(0);
+        Player p = currentPlayer;
         for (int i = 0; i< playerHostCards.size() ; i++){
             CheckBox c = playerHostCards.get(i);
             if( c.isChecked()){
                 c.setVisibility(View.GONE);
                 playerHostCards.remove(i);
                 Card card = p.getHand().get(i);
+                card.performAction();
                 changeDiscardPile(card);
                 p.getHand().remove(i);
                 for (int j = 0; j < playerHostCards.size(); j++) {
@@ -312,8 +382,7 @@ public class GameView extends AppCompatActivity {
     }
 
     public CompoundButton.OnCheckedChangeListener getListener() {
-        final Button playButton = findViewById(R.id.playCardButton);
-        playButton.setClickable(false);
+        playCardButton.setClickable(false);
         CompoundButton.OnCheckedChangeListener checkBoxListener2 = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -328,7 +397,10 @@ public class GameView extends AppCompatActivity {
                     }
                 }
                 if (numOfCardsSelected == 1) {
-                    playButton.setClickable(true);
+                    if (currentPlayer.isHost()&&currentPlayer.canPlay())
+                    {
+                        playCardButton.setClickable(true);
+                    }
                     for (int i = 0; i < playerHostCards.size(); i++) {
                         CheckBox c = playerHostCards.get(i);
                         if (!c.isChecked()) {

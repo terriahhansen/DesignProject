@@ -60,6 +60,6 @@ public class MechGenericCard implements Card, Parcelable {
 
     @Override
     public int getScore() {
-        return 0;
+        return score;
     }
 }

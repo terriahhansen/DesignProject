@@ -1,9 +1,14 @@
 package com.example.temp.trialrun3;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 
 import com.example.temp.trialrun3.Cards.Card;
+import com.example.temp.trialrun3.Cards.DeathCard;
+import com.example.temp.trialrun3.Cards.SaveCard;
 
 import java.util.ArrayList;
 
@@ -18,7 +23,7 @@ public class DumbAI implements AI, Parcelable {
     private ArrayList<Card> hand = new ArrayList<Card>();
     private boolean canPlay;
     private boolean isHost = false;
-    private DumbAIScoreCalculation calculator;
+    private ScoreCalculation calculator = new DumbAIScoreCalculation();
 
     public DumbAI( int playerNumber)
     {
@@ -50,25 +55,47 @@ public class DumbAI implements AI, Parcelable {
     {
         return new StringBuilder().append("Player ").append(Integer.toString(playerNumber)).append(":                    AI").toString();
     }
-    public boolean getHost(){
+    public boolean isHost(){
         return isHost;
     }
+
+    @Override
+    public void setIsHost(boolean flag) {
+        this.isHost = flag;
+    }
+
     public void playCard(Card cardToPlay){
         hand.remove(cardToPlay);
-//        discardPile.add(cardToPlay);
+        DiscardPile.getDiscardPile().add(cardToPlay);
         cardToPlay.performAction();
     }
-    public Card drawCard(){
 
-//         should probably be :
-//         return Deck.getDeck().draw();
-
-//        Card cardDrawn = deck.get(0);
-//        addToHand(cardDrawn);
-//        deck.remove(0);
-//        return cardDrawn;
-        return null;
+    @Override
+    public Card drawCard(String gameMode)
+    {
+        Deck deck = Deck.getDeck();
+        Card c = deck.draw();
+        if (c instanceof DeathCard)
+        {
+            for (int i=0; i<hand.size(); i++)
+            {
+                if (hand.get(i) instanceof SaveCard)
+                {
+                    DiscardPile.getDiscardPile().add(c);
+                    playCard(hand.get(i));
+                    return null;
+                }
+            }
+            setIsAlive(false);
+            return null;
+        }
+        else
+        {
+            addToHand(c);
+            return c;
+        }
     }
+
     public void addToHand(Card cardToAdd){
         hand.add(cardToAdd);
         numOfCards++;
@@ -76,24 +103,21 @@ public class DumbAI implements AI, Parcelable {
     public void setCanPlay(boolean isActivePlayer){
         canPlay = isActivePlayer;
     }
+
+    @Override
+    public boolean canPlay() {
+        return canPlay;
+    }
+
     public void setIsAlive(boolean setValue){
         isAlive = setValue;
     }
 
-    public void startTurn(){
-        calculator = new DumbAIScoreCalculation(hand);
-        Card cardToPlay = calculator.calculateScore();
-        if (cardToPlay != null)
-            playCard(cardToPlay);
-//        if( drawCard().equals(DeathCard)){
-//           if(hand.contains(SafeCard)){
-//               hand.remove(SafeCard);
-//               discardPile.add(SafeCard);
-//               deck.randomAdd(DeathCard); // not sure about this
-//            }
-//            else
-//                setIsAlive(false);
-        }
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
 
     @Override
     public int describeContents() {
@@ -111,6 +135,21 @@ public class DumbAI implements AI, Parcelable {
     }
     public ArrayList<Card> getHand(){
         return hand;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void performTurnAlgorithm(GameView game)
+    {
+        Card cardToPlay = calculator.calculateScore(hand);
+        playCard(cardToPlay);
+        game.drawCard(game.getCurrentFocus());
+    }
+
+    @Override
+    public Card determineCardToPlay(ScoreCalculation calculator, ArrayList<Card> hand)
+    {
+        return null;
     }
 
 

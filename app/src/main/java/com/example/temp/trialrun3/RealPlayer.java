@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 
 import com.example.temp.trialrun3.Cards.AttackCard;
 import com.example.temp.trialrun3.Cards.Card;
+import com.example.temp.trialrun3.Cards.DeathCard;
+import com.example.temp.trialrun3.Cards.SaveCard;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 public class RealPlayer implements Player, Parcelable {
     private int numOfCards;
     private int playerNumber;
-    private boolean isAlive;
+    private boolean isAlive = true;
     private ArrayList<Card> hand = new ArrayList<>();
     private boolean canPlay;
     private boolean isHost;
@@ -72,17 +74,56 @@ public class RealPlayer implements Player, Parcelable {
 
         return playerRepresentation.toString();
     }
-    public boolean getHost(){
+    public boolean isHost(){
         return isHost;
+    }
+
+    @Override
+    public void setIsHost(boolean flag) {
+        this.isHost = flag;
+    }
+
+    @Override
+    public void setIsAlive(boolean flag) {
+        this.isAlive = flag;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
     }
 
     public void playCard(Card cardToPlay){
 
     }
-    public Card drawCard(){
-        Card c = Deck.getDeck().draw();
-        addToHand(c);
-        return c;
+
+
+    public Card drawCard(String gameMode){
+        Deck deck = Deck.getDeck();
+        Card c = deck.draw();
+        if (c instanceof DeathCard)
+        {
+            for (int i=0; i<hand.size(); i++)
+            {
+                if (hand.get(i) instanceof SaveCard)
+                {
+                    DiscardPile.getDiscardPile().add(c);
+                    playCard(hand.get(i));
+                    return null;
+                }
+            }
+            if(ChooseMode.SINGLE_PLAYER.equals(gameMode))
+            {
+                //go to you loose
+            }
+            setIsAlive(false);
+            return null;
+        }
+        else
+        {
+            addToHand(c);
+            return c;
+        }
     }
     public void addToHand(Card cardToAdd){
         hand.add(cardToAdd);
@@ -90,6 +131,11 @@ public class RealPlayer implements Player, Parcelable {
     }
     public void setCanPlay(boolean isActivePlayer){
         canPlay = isActivePlayer;
+    }
+
+    @Override
+    public boolean canPlay() {
+        return canPlay;
     }
 
     public boolean playMultipleCards(Card[] cardsToPlay){
