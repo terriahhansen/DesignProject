@@ -34,6 +34,8 @@ import com.example.temp.trialrun3.Cards.TransformationCard;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class GameView extends AppCompatActivity {
@@ -46,7 +48,6 @@ public class GameView extends AppCompatActivity {
     private ArrayList<Player> playerList = new ArrayList<Player>();
     private ArrayList<CheckBox> playerHostCards = new ArrayList<CheckBox>();
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,31 +58,18 @@ public class GameView extends AppCompatActivity {
         cardList = getIntent().getParcelableArrayListExtra(Lobby.EXTRA_CARD_LIST);
         playerList = getIntent().getParcelableArrayListExtra(Lobby.EXTRA_PLAYER_LIST);
 
+        opponentButtonSetup();
         setupDeckAndInitialPlayerHands(numOfPlayers);
-
-        Button button = findViewById(R.id.player1Button);
-        playersShown.add(button);
-        button = findViewById(R.id.player2Button);
-        playersShown.add(button);
-        button = findViewById(R.id.player3Button);
-        playersShown.add(button);
-        button = findViewById(R.id.player4Button);
-        playersShown.add(button);
-        button = findViewById(R.id.player5Button);
-        playersShown.add(button);
-
-        for( int i=0; i<numOfOpp-1 ; i++){
-            playersShown.get(i).setVisibility(View.VISIBLE);
-        }
 
         CompoundButton.OnCheckedChangeListener listener = getListener();
 
         for ( CheckBox c : playerHostCards){
             c.setOnCheckedChangeListener(listener);
         }
-        button = findViewById(R.id.deckButton);
+        Button button = findViewById(R.id.deckButton);
         int deckSize = deck.getDeckCards().size();
         button.setText(String.valueOf(deckSize));
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -104,7 +92,7 @@ public class GameView extends AppCompatActivity {
                 displayCards(p, card);
             }
         }
-        for(Player p : playerList)
+        for (Player p : playerList)
         {
             Card card = cardFactory.makeSaveCard();
             p.addToHand(card);
@@ -120,7 +108,7 @@ public class GameView extends AppCompatActivity {
        if ( player == playerList.get(0)) {
            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.handView);
            CheckBox checkBox = new CheckBox(this);
-           LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+           LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT,1.0f);
            checkBox.setLayoutParams(layoutParams);
            getImage(card, checkBox);
            CompoundButton.OnCheckedChangeListener listener = getListener();
@@ -128,13 +116,20 @@ public class GameView extends AppCompatActivity {
            playerHostCards.add(checkBox);
            linearLayout.addView(checkBox);
        }
+       else{
+           for( int i=1; i<playerList.size(); i++){
+               if( player == playerList.get(i)){
+                   Button button = playersShown.get(i-1);
+                   addCardNum(button);
+               }
+           }
+       }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void getImage(Card card, CheckBox checkBox){
-        checkBox.setHeight(70);
-        //checkBox.setScaleY((float)0.60);
         checkBox.setButtonTintMode(PorterDuff.Mode.SRC_OVER);
+        checkBox.setScaleX(0.90f);
         ColorStateList colorStateList = new ColorStateList(new int[][]{
                 new int[]{-android.R.attr.state_enabled},
                 new int[]{android.R.attr.state_enabled, -android.R.attr.state_checked},
@@ -159,7 +154,7 @@ public class GameView extends AppCompatActivity {
         }
         else if(card.getClass() == CivilGenericCard.class)
         {
-            checkBox.setButtonDrawable(R.drawable.death);
+            checkBox.setButtonDrawable(R.drawable.civil);
         }
         else if(card.getClass() == DeathCard.class)
         {
@@ -171,19 +166,19 @@ public class GameView extends AppCompatActivity {
         }
         else if(card.getClass() == EceGenericCard.class)
         {
-            checkBox.setButtonDrawable(R.drawable.death);
+            checkBox.setButtonDrawable(R.drawable.ece);
         }
         else if(card.getClass() == MechGenericCard.class)
         {
-            checkBox.setButtonDrawable(R.drawable.death);
+            checkBox.setButtonDrawable(R.drawable.mech);
         }
         else if(card.getClass() == OnaeGenericCard.class)
         {
-            checkBox.setButtonDrawable(R.drawable.death);
+            checkBox.setButtonDrawable(R.drawable.onae);
         }
         else if(card.getClass() == ProcessGenericCard.class)
         {
-            checkBox.setButtonDrawable(R.drawable.death);
+            checkBox.setButtonDrawable(R.drawable.process);
         }
         else if(card.getClass() == SaveCard.class)
         {
@@ -222,7 +217,7 @@ public class GameView extends AppCompatActivity {
         }
         else if(card.getClass() == CivilGenericCard.class)
         {
-            button.setBackgroundResource(R.drawable.death);
+            button.setBackgroundResource(R.drawable.civil);
         }
         else if(card.getClass() == DeathCard.class)
         {
@@ -234,19 +229,19 @@ public class GameView extends AppCompatActivity {
         }
         else if(card.getClass() == EceGenericCard.class)
         {
-            button.setBackgroundResource(R.drawable.death);
+            button.setBackgroundResource(R.drawable.ece);
         }
         else if(card.getClass() == MechGenericCard.class)
         {
-            button.setBackgroundResource(R.drawable.death);
+            button.setBackgroundResource(R.drawable.mech);
         }
         else if(card.getClass() == OnaeGenericCard.class)
         {
-            button.setBackgroundResource(R.drawable.death);
+            button.setBackgroundResource(R.drawable.onae);
         }
         else if(card.getClass() == ProcessGenericCard.class)
         {
-            button.setBackgroundResource(R.drawable.death);
+            button.setBackgroundResource(R.drawable.process);
         }
         else if(card.getClass() == SaveCard.class)
         {
@@ -276,14 +271,20 @@ public class GameView extends AppCompatActivity {
         Card c = deck.draw();
         p.addToHand(c);
         displayCards(p, c);
-        changeDeckNum();
+        Button b = findViewById(R.id.deckButton);
+        subtractCardNum(b);
     }
 
-    private void changeDeckNum(){
-        Button b = findViewById(R.id.deckButton);
-        int deckNum = Integer.parseInt((String) b.getText());
-        deckNum--;
-        b.setText( (CharSequence) String.valueOf(deckNum));
+    private void addCardNum(Button button){
+       int num = Integer.parseInt((String) button.getText());
+       num++;
+       button.setText( (CharSequence) String.valueOf(num));
+    }
+
+    private void subtractCardNum(Button button){
+       int num = Integer.parseInt((String) button.getText());
+       num--;
+       button.setText( (CharSequence) String.valueOf(num));
     }
 
     public void playCard(View view){
@@ -338,5 +339,27 @@ public class GameView extends AppCompatActivity {
             }
         };
         return checkBoxListener2;
+    }
+
+    private void opponentButtonSetup(){
+        Button button = findViewById(R.id.player1Button);
+        playersShown.add(button);
+        button = findViewById(R.id.player2Button);
+        playersShown.add(button);
+        button = findViewById(R.id.player3Button);
+        playersShown.add(button);
+        button = findViewById(R.id.player4Button);
+        playersShown.add(button);
+        button = findViewById(R.id.player5Button);
+        playersShown.add(button);
+
+        for( Button b : playersShown){
+            b.setText("0");
+        }
+
+        for( int i=0; i<numOfOpp-1 ; i++){
+            playersShown.get(i).setVisibility(View.VISIBLE);
+        }
+
     }
 }
