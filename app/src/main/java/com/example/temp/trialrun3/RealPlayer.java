@@ -101,7 +101,7 @@ public class RealPlayer implements Player, Parcelable {
         DiscardPile.getDiscardPile().add(cardToPlay);
         cardToPlay.performAction();
     }
-    
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Card drawCard(String gameMode){
         Deck deck = Deck.getDeck();
@@ -145,10 +145,6 @@ public class RealPlayer implements Player, Parcelable {
         return canPlay;
     }
 
-    public boolean playMultipleCards(Card[] cardsToPlay){
-
-        return false;
-    }
 
     @Override
     public int describeContents() {

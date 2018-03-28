@@ -48,7 +48,7 @@ public class GameView extends AppCompatActivity {
     public Deck deck = Deck.getDeck();  //singleton
     private ArrayList<Player> playerList = new ArrayList<Player>();
     private ArrayList<CheckBox> playerHostCards = new ArrayList<CheckBox>();
-    private Player currentPlayer;
+    public Player currentPlayer;
     private Button drawCardButton;
     private Button playCardButton;
     private static final String DISCARD_MESSAGE = "A Discard card was drawn, your hand has been discarded";
@@ -73,6 +73,10 @@ public class GameView extends AppCompatActivity {
 
     }
 
+    public void setAttackNum(int attackFlag)
+    {
+
+    }
 
     private void startTurnRotation()
     {
@@ -95,8 +99,8 @@ public class GameView extends AppCompatActivity {
                 playerList.remove(p);
                 break;
             }
-            currentPlayer = p;          //check that at this point the play button doesnt work
-            p.setCanPlay(true);         //check that this also makes current player can play to be true
+            currentPlayer = p;
+            p.setCanPlay(true);
             while (p.canPlay())
             {
                 if (p instanceof RealPlayer)
