@@ -6,11 +6,14 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.temp.trialrun3.Cards.AlterTheFutureCard;
 import com.example.temp.trialrun3.Cards.AttackCard;
@@ -31,8 +34,6 @@ import com.example.temp.trialrun3.Cards.TransformationCard;
 
 import java.util.ArrayList;
 
-import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class GameView extends AppCompatActivity {
@@ -48,6 +49,7 @@ public class GameView extends AppCompatActivity {
     private Player currentPlayer;
     private Button drawCardButton;
     private Button playCardButton;
+    private static final String DISCARD_MESSAGE = "A Discard card was drawn, your hand has been discarded";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -70,9 +72,7 @@ public class GameView extends AppCompatActivity {
 
     }
 
-
-    private void startTurnRotation()
-    {
+    private void startTurnRotation() {
         Thread turnRotater = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,8 +82,7 @@ public class GameView extends AppCompatActivity {
         turnRotater.start();
     }
 
-    private void initiateTurnSequence()
-    {
+    private void initiateTurnSequence() {
         for (int i=0; i<playerList.size(); i++)
         {
             Player p = playerList.get(i);
@@ -165,27 +164,54 @@ public class GameView extends AppCompatActivity {
         deck.shuffle();
     }
 
+    private void discardCardCheck(Player player){
+        Toast toast = Toast.makeText(this, DISCARD_MESSAGE, Toast.LENGTH_SHORT);
+        if ( player  instanceof RealPlayer) {
+            toast.show();
+            for (int j = 0; j < playerHostCards.size(); j++) {
+                CheckBox checkBox = playerHostCards.get(j);
+                checkBox.setVisibility(View.GONE);
+                Card c = player.getHand().get(j);
+                changeDiscardPile(c);
+                player.getHand().remove(j);
+            }
+        }
+        else {
+            for (int i = 1; i < playerList.size(); i++) {
+                if (player == playerList.get(i)) {
+                    for (Card c : player.getHand())
+                        changeDiscardPile(c);
+                    player.getHand().clear();
+                    playersShown.get(i-1).setText("0");
+                }
+            }
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void displayCards(Player player, Card card){
-       if ( player  instanceof RealPlayer) {
-           LinearLayout linearLayout = (LinearLayout) findViewById(R.id.handView);
-           CheckBox checkBox = new CheckBox(this);
-           LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT,WRAP_CONTENT,1.0f);
-           checkBox.setLayoutParams(layoutParams);
-           getImage(card, checkBox);
-           CompoundButton.OnCheckedChangeListener listener = getListener();
-           checkBox.setOnCheckedChangeListener(listener);
-           playerHostCards.add(checkBox);
-           linearLayout.addView(checkBox);
-       }
-       else{
-           for( int i=1; i<playerList.size(); i++){
-               if( player == playerList.get(i)){
-                   Button button = playersShown.get(i-1);
-                   addCardNum(button);
-               }
-           }
-       }
+        if(card.getClass() == DiscardHandCard.class)
+            discardCardCheck(player);
+
+        else if ( player  instanceof RealPlayer) {
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.handView);
+            CheckBox checkBox = new CheckBox(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, 1.0f);
+            checkBox.setLayoutParams(layoutParams);
+            getImage(card, checkBox);
+            CompoundButton.OnCheckedChangeListener listener = getListener();
+            checkBox.setOnCheckedChangeListener(listener);
+            playerHostCards.add(checkBox);
+            linearLayout.addView(checkBox);
+        }
+        else {
+            for (int i = 1; i < playerList.size(); i++) {
+                if (player == playerList.get(i)) {
+                    Button button = playersShown.get(i - 1);
+                    addCardNum(button);
+                }
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -327,10 +353,8 @@ public class GameView extends AppCompatActivity {
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void callDraw()
-    {
+    public void callDraw() {
         drawCard(this.getCurrentFocus());
     }
 
@@ -429,7 +453,7 @@ public class GameView extends AppCompatActivity {
             b.setText("0");
         }
 
-        for( int i=0; i<numOfOpp-1 ; i++){
+        for( int i=0; i<numOfOpp ; i++){
             playersShown.get(i).setVisibility(View.VISIBLE);
         }
 

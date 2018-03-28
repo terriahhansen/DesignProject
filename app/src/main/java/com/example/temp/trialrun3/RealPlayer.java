@@ -97,7 +97,6 @@ public class RealPlayer implements Player, Parcelable {
 
     }
 
-
     public Card drawCard(String gameMode){
         Deck deck = Deck.getDeck();
         Card c = deck.draw();
