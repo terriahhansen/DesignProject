@@ -63,7 +63,17 @@ public class Deck {
             return null;
         }
     }
-    public ArrayList<Card> getDeckCards(){
+    private ArrayList<Card> getDeckCards(){
         return deckCards;
+    }
+
+    public int size()
+    {
+        return deckCards.size();
+    }
+
+    public void insertAt(int location, Card c)
+    {
+        deckCards.add(location,c);
     }
 }

@@ -2,8 +2,10 @@ package com.example.temp.trialrun3;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.temp.trialrun3.Cards.DeathCard;
 import com.example.temp.trialrun3.Cards.SaveCard;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Sheena on 2018-03-04.
@@ -94,9 +97,12 @@ public class RealPlayer implements Player, Parcelable {
     }
 
     public void playCard(Card cardToPlay){
-
+        hand.remove(cardToPlay);
+        DiscardPile.getDiscardPile().add(cardToPlay);
+        cardToPlay.performAction();
     }
-
+    
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Card drawCard(String gameMode){
         Deck deck = Deck.getDeck();
         Card c = deck.draw();
@@ -106,7 +112,9 @@ public class RealPlayer implements Player, Parcelable {
             {
                 if (hand.get(i) instanceof SaveCard)
                 {
-                    DiscardPile.getDiscardPile().add(c);
+                    //randomly insert the death card back into the deck
+                    int randomNum = ThreadLocalRandom.current().nextInt(0, deck.size());
+                    deck.insertAt(randomNum,c);
                     playCard(hand.get(i));
                     return null;
                 }

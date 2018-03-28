@@ -143,7 +143,21 @@ public class DumbAI implements AI, Parcelable {
     {
         Card cardToPlay = calculator.calculateScore(hand);
         playCard(cardToPlay);
-        game.drawCard(game.getCurrentFocus());
+        game.changeDiscardPile(cardToPlay);
+        Card c = game.drawCard(null);
+        if (c==null)
+        {
+            CardFactory cardFactory = new CardFactory();
+            if (isAlive)
+            {
+                game.changeDiscardPile(cardFactory.makeSaveCard());
+            }
+            else
+            {
+                game.changeDiscardPile(cardFactory.makeDeathCard());
+            }
+
+        }
     }
 
     @Override

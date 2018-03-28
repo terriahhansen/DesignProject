@@ -132,7 +132,7 @@ public class GameView extends AppCompatActivity {
             c.setOnCheckedChangeListener(listener);
         }
         deckButton = findViewById(R.id.deckButton);
-        int deckSize = deck.getDeckCards().size();
+        int deckSize = deck.size();
         deckButton.setText(String.valueOf(deckSize));
         drawCardButton.setClickable(false);
     }
