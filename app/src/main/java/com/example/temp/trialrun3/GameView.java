@@ -34,6 +34,8 @@ import com.example.temp.trialrun3.Cards.TransformationCard;
 
 import java.util.ArrayList;
 
+import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class GameView extends AppCompatActivity {
@@ -64,7 +66,6 @@ public class GameView extends AppCompatActivity {
         drawCardButton = findViewById(R.id.drawCardButton);
         playCardButton = findViewById(R.id.playCardButton);
 
-
         opponentButtonSetup();
         setupDeckAndInitialPlayerHands(numOfPlayers);
         initializeButtons();
@@ -72,7 +73,9 @@ public class GameView extends AppCompatActivity {
 
     }
 
-    private void startTurnRotation() {
+
+    private void startTurnRotation()
+    {
         Thread turnRotater = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,7 +85,8 @@ public class GameView extends AppCompatActivity {
         turnRotater.start();
     }
 
-    private void initiateTurnSequence() {
+    private void initiateTurnSequence()
+    {
         for (int i=0; i<playerList.size(); i++)
         {
             Player p = playerList.get(i);
@@ -353,19 +357,19 @@ public class GameView extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void callDraw() {
-        drawCard(this.getCurrentFocus());
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void drawCard(View view){
+    public Card drawCard(View view){
         Player p = currentPlayer;
         Card c = p.drawCard(gameMode);
-        displayCards(p, c);
+        if (c!=null)
+        {
+            displayCards(p, c);
+        }
         Button b = findViewById(R.id.deckButton);
         subtractCardNum(b);
         currentPlayer.setCanPlay(false);
+        return c;
     }
 
     private void addCardNum(Button button){
@@ -399,7 +403,7 @@ public class GameView extends AppCompatActivity {
         }
     }
 
-    private void changeDiscardPile(Card card){
+    protected void changeDiscardPile(Card card){
         Button b = findViewById(R.id.discardPileButton);
         getDiscardImage(card,b);
         DiscardPile.getDiscardPile().add(card);
@@ -453,7 +457,7 @@ public class GameView extends AppCompatActivity {
             b.setText("0");
         }
 
-        for( int i=0; i<numOfOpp ; i++){
+        for( int i=0; i<numOfOpp; i++){
             playersShown.get(i).setVisibility(View.VISIBLE);
         }
 
