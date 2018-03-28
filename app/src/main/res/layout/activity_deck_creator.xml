@@ -1,221 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.temp.trialrun3.DeckCreator">
 
-    <TableLayout
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/deckCreatorMessage"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_span="2"
+        android:onClick="confirmDeck"
+        android:text="@string/deckConfirm"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="24dp" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-        <TableRow>
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/deckCreatorMessage"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TableRow>
 
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                android:layout_weight="0"
-                android:gravity="start"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:textAlignment="viewStart"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5"
-                android:buttonTint="@color/colorPrimaryDark"/>
+            <TableRow>
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/attack" />
-        </TableRow>
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/cardlock" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/cardlock" />
-        </TableRow>
+            </TableRow>
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/collaboration" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox3"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/discard" />
-        </TableRow>
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:layout_weight="0"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:gravity="start"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    android:textAlignment="viewStart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox4"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/extension" />
-        </TableRow>
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/attack" />
+            </TableRow>
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox5"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/seethefuture" />
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox6"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/skipyourturn" />
-        </TableRow>
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
-        <TableRow>
-            <CheckBox
-                android:id="@+id/checkBox8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="110dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox7"
-                android:scaleX="1.50"
-                android:scaleY="1.50"
-                android:buttonTint="@color/colorPrimaryDark"/>
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/transform"/>
-        </TableRow>
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/collaboration" />
+            </TableRow>
 
-        <TableRow>
-            <Button
-                android:id="@+id/button7"
-                android:layout_width="203dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="110dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="16dp"
-                android:layout_span="2"
-                android:onClick="confirmDeck"
-                android:text="@string/deckConfirm"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </TableRow>
+            <TableRow>
 
-    </TableLayout>
-</ScrollView>
+                <CheckBox
+                    android:id="@+id/checkBox4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/discard" />
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/checkBox5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/extension" />
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/checkBox6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/seethefuture" />
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/checkBox7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/skipyourturn" />
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/checkBox8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/transform" />
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/checkBox9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="110dp"
+                    android:buttonTint="@color/colorPrimaryDark"
+                    android:scaleX="1.50"
+                    android:scaleY="1.50"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="170dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ece" />
+
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

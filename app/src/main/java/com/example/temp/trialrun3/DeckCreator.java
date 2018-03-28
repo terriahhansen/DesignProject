@@ -100,8 +100,7 @@ public class DeckCreator extends AppCompatActivity {
     }
 
 
-    public void confirmDeck (View view)
-    {
+    public void confirmDeck (View view) {
         for (int j = 0; j<checkBoxes.size(); j++)
         {
             CheckBox c = checkBoxes.get(j);
