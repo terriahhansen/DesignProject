@@ -37,7 +37,7 @@ public class TransformationCard implements Card,Parcelable {
                 return new TransformationCard(in);
             }
             catch (Exception e){
-                log.severe("Attempted creation of a Skip Your Turn Card from a parcel of different source type"+ e.toString());
+                log.severe("Attempted creation of a skip Your Turn Card from a parcel of different source type"+ e.toString());
             }
             return null;
         }
@@ -64,6 +64,8 @@ public class TransformationCard implements Card,Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeString(cardType);
     }
 }

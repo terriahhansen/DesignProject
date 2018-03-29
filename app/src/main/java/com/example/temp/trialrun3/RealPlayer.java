@@ -101,6 +101,7 @@ public class RealPlayer implements Player, Parcelable {
         hand.remove(cardToPlay);
         DiscardPile.getDiscardPile().add(cardToPlay);
         cardToPlay.performAction(gameView);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

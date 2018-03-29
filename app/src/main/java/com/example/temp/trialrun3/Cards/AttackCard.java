@@ -44,7 +44,7 @@ public class AttackCard implements Card, Parcelable
             }
             catch (Exception e)
             {
-               log.severe("Attempted creation of an Attack Card from a parcel of different source type"+ e.toString());
+               log.severe("Attempted creation of an attack Card from a parcel of different source type"+ e.toString());
             }
             return null;
         }
@@ -68,8 +68,7 @@ public class AttackCard implements Card, Parcelable
 
     @Override
     public void performAction(GameView gameView) {
-
-        CardActions.Attack();
+        CardActions.attack(gameView);
     }
 
     @Override

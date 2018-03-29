@@ -3,6 +3,7 @@ package com.example.temp.trialrun3.Cards;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.temp.trialrun3.CardActions;
 import com.example.temp.trialrun3.GameView;
 
 import java.util.logging.Logger;
@@ -16,7 +17,7 @@ public class SkipYourTurnCard implements Card, Parcelable {
     public static final int ID_NUMBER = 7;
     private final String cardType = this.getClass().toString();
     private static final String cardTitle = "Fell Asleep In Class";
-    private static final String actionDescription = "Skip Your Turn";
+    private static final String actionDescription = "skip Your Turn";
     private static final int score = 6;
     private static Logger log;
 
@@ -37,7 +38,7 @@ public class SkipYourTurnCard implements Card, Parcelable {
                 return new SkipYourTurnCard(in);
             }
             catch (Exception e){
-                log.severe("Attempted creation of a Skip Your Turn Card from a parcel of different source type"+ e.toString());
+                log.severe("Attempted creation of a skip Your Turn Card from a parcel of different source type"+ e.toString());
             }
             return null;
         }
@@ -59,8 +60,9 @@ public class SkipYourTurnCard implements Card, Parcelable {
     }
 
     @Override
-    public void performAction(GameView gameView) {
-
+    public void performAction(GameView gameView)
+    {
+        CardActions.skip(gameView);
     }
 
     @Override

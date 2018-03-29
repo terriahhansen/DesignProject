@@ -60,6 +60,7 @@ public class SeeTheFutureCard implements Card, Parcelable {
 
     @Override
     public void performAction(GameView gameView) {
+
         CardActions.SeeTheFuture(gameView);
     }
 

@@ -15,9 +15,15 @@ import com.example.temp.trialrun3.Cards.Card;
 
 public class CardActions {
 
-    public static void Attack()
+    public static void attack(GameView game)
     {
+        game.setAttackNum(1);
+    }
 
+
+    public static void skip(GameView game)
+    {
+        game.currentPlayer.setCanPlay(false);
     }
     public static void SeeTheFuture(GameView gameview){
         Deck deck = Deck.getDeck();
