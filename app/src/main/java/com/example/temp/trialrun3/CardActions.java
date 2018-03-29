@@ -29,11 +29,12 @@ public class CardActions {
         if (gameview.currentPlayer instanceof RealPlayer)
         {
         Deck deck = Deck.getDeck();
+        LinearLayout linearLayout = (LinearLayout) gameview.findViewById(R.id.seeTheFutureView);
+        linearLayout.removeAllViews();
         for ( int i = 0; i <3 ; i++) {
             Card card = deck.getDeckCards().get(i);
             ConstraintLayout constraintLayout = gameview.findViewById(R.id.seeTheFutureContraint);
             constraintLayout.setVisibility(View.VISIBLE);
-            LinearLayout linearLayout = (LinearLayout) gameview.findViewById(R.id.seeTheFutureView);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             Button button = new Button(gameview);
             button.setText(String.valueOf(i));
