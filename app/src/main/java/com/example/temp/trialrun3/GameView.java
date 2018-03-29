@@ -39,10 +39,10 @@ public class GameView extends AppCompatActivity {
     private int numOfOpp;
     private int startingHandSize = 4;
     protected String gameMode;
-    private ArrayList<Button> playersShown = new ArrayList<>();
+    protected ArrayList<Button> playersShown = new ArrayList<>();
     private ArrayList<Card> cardList = new ArrayList<Card>();
     public Deck deck = Deck.getDeck();  //singleton
-    private ArrayList<Player> playerList = new ArrayList<Player>();
+    protected ArrayList<Player> playerList = new ArrayList<Player>();
     private ArrayList<CheckBox> playerHostCards = new ArrayList<CheckBox>();
     public Player currentPlayer;
     private Button drawCardButton;
@@ -92,11 +92,6 @@ public class GameView extends AppCompatActivity {
         for (int i=0; i<playerList.size(); i++)
         {
             Player p = playerList.get(i);
-            if(!p.isAlive())
-            {
-                playerList.remove(p);
-                break;
-            }
             currentPlayer = p;
             p.setCanPlay(true);
             while (p.canPlay())
@@ -126,6 +121,15 @@ public class GameView extends AppCompatActivity {
         }
     }
 
+    public void discardUpdate(final Card cardToPlay)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                changeDiscardPile(cardToPlay);
+            }
+        });
+    }
     private void initializeButtons() {
         Button deckButton;
         CompoundButton.OnCheckedChangeListener listener = getListener();
@@ -365,12 +369,32 @@ public class GameView extends AppCompatActivity {
         Card c = p.drawCard(gameMode);
         if (c!=null)
         {
-            displayCards(p, c);
+            callDisplayCards(p, c);
         }
         Button b = findViewById(R.id.deckButton);
-        subtractCardNum(b);
+        callSubtractCardNum(b);
         currentPlayer.setCanPlay(false);
         return c;
+    }
+
+    public void callSubtractCardNum(final Button b)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                subtractCardNum(b);
+            }
+        });
+    }
+    public void callDisplayCards(final Player p, final Card c)
+    {
+        runOnUiThread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void run() {
+                displayCards(p,c);
+            }
+        });
     }
 
     private void addCardNum(Button button){
@@ -393,7 +417,7 @@ public class GameView extends AppCompatActivity {
                 c.setVisibility(View.GONE);
                 playerHostCards.remove(i);
                 Card card = p.getHand().get(i);
-                card.performAction(this);
+                card.performAction(gameView);
                 changeDiscardPile(card);
                 p.getHand().remove(i);
                 for (int j = 0; j < playerHostCards.size(); j++) {
@@ -464,6 +488,26 @@ public class GameView extends AppCompatActivity {
 
     }
 
+    public void killPlayer(final int playerNumber)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                playersShown.get(playerNumber-1).setEnabled(false);
+            }
+        });
+    }
+
+    public void eliminatePlayer(final int playerNumber)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                playersShown.get(playerNumber-1).setVisibility(View.GONE);
+            }
+        });
+
+    }
     public void disablePopUp( View view){
         findViewById(R.id.seeTheFutureContraint).setVisibility(View.GONE);
     }

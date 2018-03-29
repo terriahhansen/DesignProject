@@ -31,5 +31,10 @@ public class DiscardPile {
         discardPileCards.add(card);
     }
 
+    public void addAll(ArrayList<Card> cards)
+    {
+        discardPileCards.addAll(cards);
+    }
+
 
 }

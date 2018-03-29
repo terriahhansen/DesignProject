@@ -26,6 +26,8 @@ public class CardActions {
         game.currentPlayer.setCanPlay(false);
     }
     public static void SeeTheFuture(GameView gameview){
+        if (gameview.currentPlayer instanceof RealPlayer)
+        {
         Deck deck = Deck.getDeck();
         for ( int i = 0; i <3 ; i++) {
             Card card = deck.getDeckCards().get(i);
@@ -39,6 +41,7 @@ public class CardActions {
             button.setLayoutParams(layoutParams);
             gameview.getImageButton(card, button);
             linearLayout.addView(button);
+        }
         }
     }
     public static void AlterTheFuture(){

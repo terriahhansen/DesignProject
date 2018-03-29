@@ -5,12 +5,15 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.temp.trialrun3.Cards.Card;
 import com.example.temp.trialrun3.Cards.DeathCard;
 import com.example.temp.trialrun3.Cards.SaveCard;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Sheena on 2018-03-04.
@@ -71,6 +74,7 @@ public class DumbAI implements AI, Parcelable {
         cardToPlay.performAction(gameView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public Card drawCard(String gameMode)
     {
@@ -82,7 +86,8 @@ public class DumbAI implements AI, Parcelable {
             {
                 if (hand.get(i) instanceof SaveCard)
                 {
-                    DiscardPile.getDiscardPile().add(c);
+                    int randomNum = ThreadLocalRandom.current().nextInt(0, deck.size());
+                    deck.insertAt(randomNum,c);
                     playCard(hand.get(i));
                     return null;
                 }
@@ -145,18 +150,24 @@ public class DumbAI implements AI, Parcelable {
         gameView = game;
         Card cardToPlay = calculator.calculateScore(hand);
         playCard(cardToPlay);
-        game.changeDiscardPile(cardToPlay);
+        Button button = game.playersShown.get(playerNumber-1);
+        game.callSubtractCardNum(button);
+        game.discardUpdate(cardToPlay);
         Card c = game.drawCard(null);
         if (c==null)
         {
             CardFactory cardFactory = new CardFactory();
             if (isAlive)
             {
-                game.changeDiscardPile(cardFactory.makeSaveCard());
+                game.discardUpdate(cardFactory.makeSaveCard());
             }
             else
             {
-                game.changeDiscardPile(cardFactory.makeDeathCard());
+//                game.eliminatePlayer(playerNumber);
+//                game.killPlayer(playerNumber);
+                game.discardUpdate(cardFactory.makeDeathCard());
+//                DiscardPile.getDiscardPile().addAll(hand);
+//                game.playerList.remove(this);
             }
 
         }
