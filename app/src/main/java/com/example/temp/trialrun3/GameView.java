@@ -48,6 +48,7 @@ public class GameView extends AppCompatActivity {
     private Button drawCardButton;
     private Button playCardButton;
     private static final String DISCARD_MESSAGE = "A Discard card was drawn, your hand has been discarded";
+    private GameView gameView = this;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -61,6 +62,7 @@ public class GameView extends AppCompatActivity {
         gameMode = getIntent().getStringExtra(ChooseMode.EXTRA_GAMEMODE);
         drawCardButton = findViewById(R.id.drawCardButton);
         playCardButton = findViewById(R.id.playCardButton);
+
 
         ((RealPlayer) playerList.get(0)).setGameView(this);
 
@@ -113,7 +115,7 @@ public class GameView extends AppCompatActivity {
                 else if (p instanceof AI)
                 {
                     drawCardButton.setClickable(false);
-                    ((AI) p).performTurnAlgorithm(this);
+                    ((AI) p).performTurnAlgorithm(gameView);
                 }
             }
 
