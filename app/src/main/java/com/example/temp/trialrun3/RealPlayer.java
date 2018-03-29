@@ -32,6 +32,7 @@ public class RealPlayer implements Player, Parcelable {
     private ArrayList<Card> hand = new ArrayList<>();
     private boolean canPlay;
     private boolean isHost;
+    private GameView gameView;
 
     public RealPlayer(int playerNumber) {
         this.playerNumber = playerNumber;
@@ -99,7 +100,7 @@ public class RealPlayer implements Player, Parcelable {
     public void playCard(Card cardToPlay){
         hand.remove(cardToPlay);
         DiscardPile.getDiscardPile().add(cardToPlay);
-        cardToPlay.performAction();
+        cardToPlay.performAction(gameView);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -121,7 +122,7 @@ public class RealPlayer implements Player, Parcelable {
             }
             if(ChooseMode.SINGLE_PLAYER.equals(gameMode))
             {
-                //go to you loose
+                //go to you lose
             }
             setIsAlive(false);
             return null;
@@ -163,5 +164,9 @@ public class RealPlayer implements Player, Parcelable {
 
     public ArrayList<Card> getHand(){
         return hand;
+    }
+
+    public void setGameView(GameView view){
+        gameView = view;
     }
 }

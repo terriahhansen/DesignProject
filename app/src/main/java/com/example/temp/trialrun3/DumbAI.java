@@ -24,6 +24,7 @@ public class DumbAI implements AI, Parcelable {
     private boolean canPlay;
     private boolean isHost = false;
     private ScoreCalculation calculator = new DumbAIScoreCalculation();
+    private GameView gameView;
 
     public DumbAI( int playerNumber)
     {
@@ -67,7 +68,7 @@ public class DumbAI implements AI, Parcelable {
     public void playCard(Card cardToPlay){
         hand.remove(cardToPlay);
         DiscardPile.getDiscardPile().add(cardToPlay);
-        cardToPlay.performAction();
+        cardToPlay.performAction(gameView);
     }
 
     @Override
@@ -141,6 +142,7 @@ public class DumbAI implements AI, Parcelable {
     @Override
     public void performTurnAlgorithm(GameView game)
     {
+        gameView = game;
         Card cardToPlay = calculator.calculateScore(hand);
         playCard(cardToPlay);
         game.changeDiscardPile(cardToPlay);

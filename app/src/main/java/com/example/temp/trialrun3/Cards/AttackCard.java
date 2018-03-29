@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.temp.trialrun3.CardActions;
+import com.example.temp.trialrun3.GameView;
 
 import java.util.logging.Logger;
 
@@ -66,7 +67,7 @@ public class AttackCard implements Card, Parcelable
     }
 
     @Override
-    public void performAction() {
+    public void performAction(GameView gameView) {
 
         CardActions.Attack();
     }

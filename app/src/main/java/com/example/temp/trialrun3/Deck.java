@@ -63,7 +63,7 @@ public class Deck {
             return null;
         }
     }
-    private ArrayList<Card> getDeckCards(){
+    public ArrayList<Card> getDeckCards(){
         return deckCards;
     }
 

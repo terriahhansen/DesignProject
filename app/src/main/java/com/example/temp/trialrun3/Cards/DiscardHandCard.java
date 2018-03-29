@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.temp.trialrun3.Cards.Card;
+import com.example.temp.trialrun3.GameView;
 
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class DiscardHandCard implements Card, Parcelable {
 
 
     @Override
-    public void performAction() {
+    public void performAction(GameView gameView) {
 
     }
 

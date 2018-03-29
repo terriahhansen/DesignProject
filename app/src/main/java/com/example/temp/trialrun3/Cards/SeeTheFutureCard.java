@@ -3,6 +3,9 @@ package com.example.temp.trialrun3.Cards;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.temp.trialrun3.CardActions;
+import com.example.temp.trialrun3.GameView;
+
 import java.util.logging.Logger;
 
 /**
@@ -56,8 +59,8 @@ public class SeeTheFutureCard implements Card, Parcelable {
     }
 
     @Override
-    public void performAction() {
-// do something
+    public void performAction(GameView gameView) {
+        CardActions.SeeTheFuture(gameView);
     }
 
     @Override

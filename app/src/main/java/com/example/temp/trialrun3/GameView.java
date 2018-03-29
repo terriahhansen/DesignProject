@@ -6,13 +6,11 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.temp.trialrun3.Cards.AlterTheFutureCard;
@@ -34,8 +32,6 @@ import com.example.temp.trialrun3.Cards.TransformationCard;
 
 import java.util.ArrayList;
 
-import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class GameView extends AppCompatActivity {
@@ -66,6 +62,8 @@ public class GameView extends AppCompatActivity {
         drawCardButton = findViewById(R.id.drawCardButton);
         playCardButton = findViewById(R.id.playCardButton);
 
+        ((RealPlayer) playerList.get(0)).setGameView(this);
+
         opponentButtonSetup();
         setupDeckAndInitialPlayerHands(numOfPlayers);
         initializeButtons();
@@ -78,8 +76,7 @@ public class GameView extends AppCompatActivity {
 
     }
 
-    private void startTurnRotation()
-    {
+    private void startTurnRotation() {
         Thread turnRotater = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -89,8 +86,7 @@ public class GameView extends AppCompatActivity {
         turnRotater.start();
     }
 
-    private void initiateTurnSequence()
-    {
+    private void initiateTurnSequence() {
         for (int i=0; i<playerList.size(); i++)
         {
             Player p = playerList.get(i);
@@ -206,7 +202,7 @@ public class GameView extends AppCompatActivity {
             CheckBox checkBox = new CheckBox(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, 1.0f);
             checkBox.setLayoutParams(layoutParams);
-            getImage(card, checkBox);
+            getImageCheckbox(card, checkBox);
             CompoundButton.OnCheckedChangeListener listener = getListener();
             checkBox.setOnCheckedChangeListener(listener);
             playerHostCards.add(checkBox);
@@ -223,7 +219,7 @@ public class GameView extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void getImage(Card card, CheckBox checkBox){
+    protected void getImageCheckbox(Card card, CheckBox checkBox){
         checkBox.setButtonTintMode(PorterDuff.Mode.SRC_OVER);
         checkBox.setScaleX(0.90f);
         ColorStateList colorStateList = new ColorStateList(new int[][]{
@@ -299,7 +295,7 @@ public class GameView extends AppCompatActivity {
 
     }
 
-    private void getDiscardImage(Card card, Button button){
+    protected void getImageButton(Card card, Button button){
         if( card.getClass() == AttackCard.class){
             button.setBackgroundResource(R.drawable.attack);
         }
@@ -361,7 +357,6 @@ public class GameView extends AppCompatActivity {
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Card drawCard(View view){
         Player p = currentPlayer;
@@ -396,7 +391,7 @@ public class GameView extends AppCompatActivity {
                 c.setVisibility(View.GONE);
                 playerHostCards.remove(i);
                 Card card = p.getHand().get(i);
-                card.performAction();
+                card.performAction(this);
                 changeDiscardPile(card);
                 p.getHand().remove(i);
                 for (int j = 0; j < playerHostCards.size(); j++) {
@@ -409,7 +404,7 @@ public class GameView extends AppCompatActivity {
 
     protected void changeDiscardPile(Card card){
         Button b = findViewById(R.id.discardPileButton);
-        getDiscardImage(card,b);
+        getImageButton(card,b);
         DiscardPile.getDiscardPile().add(card);
     }
 
@@ -466,4 +461,9 @@ public class GameView extends AppCompatActivity {
         }
 
     }
+
+    public void disablePopUp( View view){
+        findViewById(R.id.seeTheFutureContraint).setVisibility(View.GONE);
+    }
+
 }

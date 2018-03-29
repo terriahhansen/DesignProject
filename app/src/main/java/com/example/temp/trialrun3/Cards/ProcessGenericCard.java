@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ProgressBar;
 
+import com.example.temp.trialrun3.GameView;
+
 import java.util.logging.Logger;
 
 /**
@@ -44,7 +46,7 @@ public class ProcessGenericCard implements Card, Parcelable {
     };
 
     @Override
-    public void performAction() {
+    public void performAction(GameView gameView) {
 
     }
 
